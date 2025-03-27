@@ -150,4 +150,3 @@ SECRET_KEY = 'your-secret-key'
 | `email` |	VARCHAR	| Уникальный email |
 | `hashed_pass` |	VARCHAR	| Хэш пароля |
 
-
