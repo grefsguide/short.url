@@ -59,7 +59,7 @@ curl -X GET "http://localhost:8000/api/links/search?search_term=example&tag_name
 ```
 ### Получение неактивных ссылок
 ```bash
-curl -X GET "http://localhost:8000/api/links/inactive" \
+curl -X GET "http://localhost:8000/api/links/exp_links" \
   -H "Authorization: Bearer <your_token>"
 ```
 ### Изменение ссылок (url и метки)
