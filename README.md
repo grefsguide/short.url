@@ -127,7 +127,7 @@ SECRET_KEY = 'your-secret-key'
 |-------|---------|--------------|
 | `id`	| SERIAL	| Первичный ключ| 
 |`original_url`	| VARCHAR	| Оригинальный URL |
-| `short_url`	| VARCHAR	| Сокращенный код |
+| `short_code`	| VARCHAR	| Сокращенный код |
 | `created_at` | TIMESTAMP	| Дата создания |
 | `expires_at`	| TIMESTAMP	| Срок действия |
 | `is_active`	| BOOLEAN	| Активна ли ссылка |
