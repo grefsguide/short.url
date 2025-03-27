@@ -285,6 +285,8 @@ async def delete_link(
     if not link:
         raise HTTPException(status_code=404, detail="Ссылка не найдена или доступ запрещён")
 
+    tag_name = link.tag.name if link.tag else ""
+    
     db.delete(link)
     db.commit()
 
@@ -292,7 +294,7 @@ async def delete_link(
         f"short:{short_code}",
         mapping={
             "url": link.original_url,
-            "tag": link.tag.name if link.tag else ""
+            "tag": tag_name
         }
     )
     return {"message": "Ссылка удалена"}
