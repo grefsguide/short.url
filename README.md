@@ -129,6 +129,7 @@ SECRET_KEY = 'your-secret-key'
 |`original_url`	| VARCHAR	| Оригинальный URL |
 | `short_code`	| VARCHAR	| Сокращенный код |
 | `created_at` | TIMESTAMP	| Дата создания |
+| `last_used_at` | TIMESTAMP | Время последнего нажатия |
 | `expires_at`	| TIMESTAMP	| Срок действия |
 | `is_active`	| BOOLEAN	| Активна ли ссылка |
 | `owner_id`	| INTEGER	| Владелец (FK → users) |
