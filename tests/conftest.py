@@ -6,6 +6,7 @@ import sys
 import os
 import uuid
 from src.auth.utils import hash_password
+from unittest.mock import AsyncMock
 from src.url.models import Link, Tag
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src")))
@@ -72,8 +73,24 @@ def test_data(db):
     db.commit()
     yield
 
+@pytest.fixture(scope="session")
+def event_loop():
+    import asyncio
+    loop = asyncio.get_event_loop_policy().new_event_loop()
+    yield loop
+    loop.close()
+
+
+@pytest.fixture
+def redis_mock(mocker):
+    mock = AsyncMock()
+    mocker.patch("src.url.url.redis", new=mock)
+    return mock
 @pytest.fixture
 def authorized_client(client):
     client.post("/auth/register", json={"email": "user@test.com", "password": "pass"})
     client.post("/auth/login", json={"email": "user@test.com", "password": "pass"})
     return client
+
+
+

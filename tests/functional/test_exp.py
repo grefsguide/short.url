@@ -1,8 +1,9 @@
+import uuid
 from src.auth.models import User
 from src.url.models import Link, Tag
 from src.auth.utils import hash_password
 from datetime import datetime, timedelta
-import uuid
+
 
 def test_get_exp_links(client, db):
     test_data = {
