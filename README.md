@@ -109,11 +109,11 @@ curl -X 'POST' \
 ```
 DB_USER = 'db_user'
 DB_PASS = 'db_pass'
-DB_HOST = 'localhost'
+DB_HOST = 'db'
 DB_PORT = '5432'
 DB_NAME = 'name_db'
 ALGORITHM = 'HS256'
-REDIS_URL = 'redis://localhost:6379'
+REDIS_URL = 'redis://redis:6379'
 SECRET_KEY = 'your-secret-key'
 ```
 3) Запускаете Docker и alembic
