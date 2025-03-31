@@ -1,13 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, Request, status, Query
 from fastapi.responses import RedirectResponse
 import datetime, secrets, re
-import redis.asyncio as aioredis
+from redis import asyncio as aioredis
 from sqlalchemy import func
 from typing import Optional
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy.exc import IntegrityError
 import urllib.parse
 
+from src.config import REDIS_URL
 from src.config import TTL_LINK
 from src.database import get_db
 from src.url.models import Link, Tag
@@ -15,7 +16,7 @@ from src.url.schemas import LinkCreate, LinkUpdate, LinkStats, LinkSearchResult,
 from src.auth.auth import get_current_user
 
 router = APIRouter()
-
+redis_client = aioredis.from_url(REDIS_URL)
 #Написал по приколу, чтобы у юзера отображалось как bit.ly в /shorten и обновлении ссылки
 BASE_SHORT_URL = "https://url.short/"
 
@@ -24,7 +25,6 @@ def generate_short_code(length: int = 8) -> str:
     return ''.join(secrets.choice(alphabet) for _ in range(length))
 
 async def get_redis():
-    from src.config import REDIS_URL
     redis = await aioredis.from_url(REDIS_URL)
     try:
         yield redis
@@ -217,7 +217,6 @@ async def redirect_link(
                             status_code=status.HTTP_307_TEMPORARY_REDIRECT
                             )
 
-
 @router.put("/links/{short_code}")
 async def update_link(
                       short_code: str,
@@ -276,7 +275,7 @@ async def delete_link(
                       current_user: dict = Depends(get_current_user),
                       redis=Depends(get_redis)
                       ):
-    if current_user.get("sub") == str(2):
+    if current_user.get("sub") == None:
         raise HTTPException(status_code=401,
                             detail="Требуется аутентификация для удаления ссылки")
 
@@ -286,7 +285,7 @@ async def delete_link(
         raise HTTPException(status_code=404, detail="Ссылка не найдена или доступ запрещён")
 
     tag_name = link.tag.name if link.tag else ""
-    
+
     db.delete(link)
     db.commit()
 

@@ -19,7 +19,7 @@ def get_current_user(request: Request, token: str = Depends(oauth2_scheme), db: 
         anon = get_user_by_email(db, "anonymous@example.com")
         if not anon:
             anon = create_user(db, "anonymous@example.com", hash_password("anonymous"))
-        return {"sub": str(anon.id)}
+        return {"sub": None}
     payload = decode_access_token(token)
     if not payload or "sub" not in payload:
         raise HTTPException(
