@@ -16,9 +16,10 @@ from src.url.schemas import LinkCreate, LinkUpdate, LinkStats, LinkSearchResult,
 from src.auth.auth import get_current_user
 
 router = APIRouter()
+
 redis_client = aioredis.from_url(REDIS_URL)
-#Написал по приколу, чтобы у юзера отображалось как bit.ly в /shorten и обновлении ссылки
-BASE_SHORT_URL = "https://url.short/"
+
+BASE_SHORT_URL = "https://url.short/" #Написал по приколу, чтобы у юзера отображалось как bit.ly в /shorten и обновлении ссылки
 
 def generate_short_code(length: int = 8) -> str:
     alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -194,7 +195,7 @@ async def redirect_link(
         return RedirectResponse(url=cached_url.decode("utf-8"))
 
     link = db.query(Link).filter(
-                                 Link.short_code == short_code,  # Теперь ищем по short_code
+                                 Link.short_code == short_code,
                                  Link.is_active == True
                                 ).first()
 
