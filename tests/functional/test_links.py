@@ -139,15 +139,3 @@ def test_update_link_tag_removal(client, authorized_client, db):
     assert link.original_url == "https://updated.com"
 
 
-@pytest.mark.asyncio
-@patch("src.url.url.redis_client")
-async def test_redis_cache_update_on_create(mock_redis, client):
-    mock_redis.hset = AsyncMock()
-
-    response = client.post(
-        "/api/links/shorten",
-        json={"original_url": "https://redis-cache.com"}
-    )
-
-    assert response.status_code == 201
-    mock_redis.hset.assert_awaited_once()

@@ -76,7 +76,8 @@ def test_data(db):
 @pytest.fixture(scope="session")
 def event_loop():
     import asyncio
-    loop = asyncio.get_event_loop_policy().new_event_loop()
+    policy = asyncio.WindowsSelectorEventLoopPolicy() if os.name == 'nt' else asyncio.DefaultEventLoopPolicy()
+    loop = policy.new_event_loop()
     yield loop
     loop.close()
 
@@ -86,6 +87,7 @@ def redis_mock(mocker):
     mock = AsyncMock()
     mocker.patch("src.url.url.redis", new=mock)
     return mock
+
 @pytest.fixture
 def authorized_client(client):
     client.post("/auth/register", json={"email": "user@test.com", "password": "pass"})
