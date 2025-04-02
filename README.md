@@ -105,11 +105,11 @@ curl -X 'POST' \
 ```
 DB_USER = 'db_user'
 DB_PASS = 'db_pass'
-DB_HOST = 'db_postgres'
+DB_HOST = 'db_postgres' # Изменять не надо 
 DB_PORT = '5432'
 DB_NAME = 'name_db'
 ALGORITHM = 'HS256'
-REDIS_URL = 'redis://redis:6379'
+REDIS_URL = 'redis://redis:6379' # Изменять не надо
 SECRET_KEY = 'your-secret-key'
 ```
 3) Запускаете Docker
