@@ -51,7 +51,7 @@ curl -X 'POST' \
 
 ### Поиск ссылок (как по url, так и по метке)
 ```bash
-curl -X GET "http://localhost:8000/api/links/search?search_term=example&tag_name=test"
+curl -X GET "http://localhost:8000/api/links/search?original_url=https://example.com/long-url&tag_name=example"
 ```
 ### Получение неактивных ссылок
 ```bash
