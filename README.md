@@ -49,10 +49,6 @@ curl -X 'POST' \
     }'
 ```
 
-### Поиск ссылки
-```bash
-curl -X GET "http://localhost:8000/api/links/search?search_term=example&tag_name=test"
-```
 ### Поиск ссылок (как по url, так и по метке)
 ```bash
 curl -X GET "http://localhost:8000/api/links/search?search_term=example&tag_name=test"
