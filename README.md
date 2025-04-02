@@ -49,7 +49,7 @@ curl -X 'POST' \
     }'
 ```
 
-### Получение статистики
+### Поиск ссылки
 ```bash
 curl -X GET "http://localhost:8000/api/links/search?search_term=example&tag_name=test"
 ```
