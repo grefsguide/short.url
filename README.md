@@ -154,3 +154,7 @@ SECRET_KEY = 'your-secret-key'
 ```bash
 $ pytest -W ignore -v --cov=src
 ```
+Нагрузочный тест:
+Если меняли хоста и порт, то подставьте свои в {}
+```bash
+$ locust -f tests/load_test/locustfile.py --host http://{host}:{port}
