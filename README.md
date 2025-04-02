@@ -152,9 +152,9 @@ SECRET_KEY = 'your-secret-key'
 
 ## Тесты
 
-Тысты покрывают 91%, чтобы посмотреть htmlcov/index.html
+Тысты покрывают 92%, чтобы посмотреть htmlcov/index.html
 
 Для запуска тестов вводим команду:
 ```bash
-$ pytest --cov=src
+$ pytest -W ignore -v --cov=src
 ```
