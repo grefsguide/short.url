@@ -15,4 +15,4 @@ ALGORITHM = os.getenv("ALGORITHM")
 TTL = 30
 TTL_LINK = 1 #Дни жизни ссылки, сначала переходит в состояние неактивности и через то же время удаляется(если не обновить)
 CLEANUP_INTERVAL = 86400 #sec
-DATABASE_URL = os.getenv("DATABASE_URL", f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
+DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
